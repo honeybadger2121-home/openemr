@@ -1,0 +1,44 @@
+# OpenEMR Docker Compose Configuration
+# Official OpenEMR Docker Setup for ddns.badgertechnologies.us
+# Production-ready with proper security
+
+version: '3.8'
+
+services:
+  mysql:
+    restart: always
+    image: mariadb:10.11
+    command: ['mysqld','--character-set-server=utf8mb4']
+    volumes:
+      - databasevolume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-OpenEMR_Root_2024!Secure}
+      MYSQL_DATABASE: openemr
+      MYSQL_USER: openemr
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-OpenEMR_DB_2024!Secure}
+
+  openemr:
+    restart: always
+    image: openemr/openemr:7.0.2
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - logvolume01:/var/log
+      - sitevolume:/var/www/localhost/htdocs/openemr/sites
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_ROOT_PASS: ${MYSQL_ROOT_PASSWORD:-OpenEMR_Root_2024!Secure}
+      MYSQL_USER: openemr
+      MYSQL_PASS: ${MYSQL_PASSWORD:-OpenEMR_DB_2024!Secure}
+      OE_USER: ${OE_USER:-admin}
+      OE_PASS: ${OE_PASS:-Admin_2024!Secure}
+      EASY_DEV_MODE: "off"
+      EASY_DEV_MODE_NEW: "off"
+    depends_on:
+      - mysql
+
+volumes:
+  logvolume01: {}
+  sitevolume: {}
+  databasevolume: {}

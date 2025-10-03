@@ -7,8 +7,8 @@ $disable_utf8_flag = false;
 
 $host   = 'localhost';
 $port   = '3306';
-$login  = 'openemr';
-$pass   = 'openemr';
+$login  = 'admin';
+$pass   = 'Badger1234!';
 $dbase  = 'openemr';
 $db_encoding = 'utf8mb4';
 
@@ -25,7 +25,7 @@ $sqlconf["db_encoding"] = $db_encoding;
 //////////////////////////
 //////////////////////////
 //////DO NOT TOUCH THIS///
-$config = 0; /////////////
+$config = 1; /////////////
 //////////////////////////
 //////////////////////////
 //////////////////////////
