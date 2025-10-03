@@ -1,0 +1,7 @@
+tunnel: 74f3a7b9-44a1-47db-a975-744091eea32d
+credentials-file: C:\Users\Administrator\.cloudflared\74f3a7b9-44a1-47db-a975-744091eea32d.json
+
+ingress:
+  - hostname: openemr.badgertechnologies.us
+    service: http://localhost:8080
+  - service: http_status:404
